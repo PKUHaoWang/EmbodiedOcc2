@@ -76,11 +76,13 @@
                                 <a target="_blank" href="https://ucwxb.github.io/">Xiaobao&#160;Wei</a><sup>2,3*</sup>,
                                 <a target="_blank"
                                     href="https://github.com/Paipai-zxa">Xiaoan&#160;Zhang</a><sup>1;</sup>,
-                                <br>
+                                <a target="_blank"
+                                    href="https://github.com/myendless1">Ying&#160;Li</a><sup>1;</sup>,
                                 <a target="_blank" o
                                     href="https://github.com/NorthSummer">Jianing&#160;Li</a><sup>4</sup>,
                                 <a target="_blank"
                                     href="https://scholar.google.com/citations?user=sgr_tJEAAAAJ&hl">Chengyu&#160;Bai</a><sup>1</sup>,
+                                <br>
                                 <a target="_blank"
                                     href="hhttps://lu-m13.github.io/">Ming&#160;Lu</a><sup>1,5</sup>,
                                 <a target="_blank"
@@ -210,22 +212,13 @@
                     <p>
                         <ul>
                             <li><b>
-                                    To represent planar structures in indoor environments, we introduce a 
-                                    <span style="color: #E4A902;">Geometry-guided Refinement Module (GRM)</span> 
-                                    that constrains Gaussian updates using monocular cues derived from surface properties.
+                                    We propose a <span style="color: #E4A902;">Geometry-guided Refinement Module (GRM)</span> that constrains Gaussian updates through plane regularization, adaptively enforcing strong constraints only when both curvature and depth cues indicate planar regions.  
                                 </b></li>
                             <br>
                             <li><b>
-                                    To ensure accurate geometric regularization, we design an 
-                                    <span style="color: #E4A902;">adaptive constraint fusion strategy</span> 
-                                    that enforces strong constraints only when curvature and depth cues jointly indicate planar regions. 
+                                    We propose a <span style="color: #E4A902;">Semantic-aware Uncertainty Sampler (SUS)</span> that adaptively selects and updates low-confidence Gaussians in overlapping regions between consecutive frames to mitigate redundancy in memory updates.
                                 </b></li>
                             <br>
-                            <li><b>
-                                    To mitigate redundancy in memory updates, we propose a 
-                                    <span style="color: #E4A902;">Semantic-aware Uncertainty Sampler (SUS)</span> 
-                                    that adaptively selects and updates low-confidence Gaussians in overlapping regions between consecutive frames. 
-                                </b></li>
                             <li><b>
                                     Our method achieves <span style="color: #E4A902;">state-of-the-art (SOTA)</span> performance on the EmbodiedOcc-ScanNet benchmark across various indoor occupancy prediction settings.  
                                 </b></li>
@@ -266,14 +259,17 @@
                     <div class="content has-text-justified">
                         <p>
                             Online 3D occupancy prediction provides a comprehensive spatial understanding of embodied environments. 
-                            While the innovative EmbodiedOcc framework utilizes 3D semantic Gaussians for progressive indoor occupancy prediction, it overlooks the geometric features of indoor environments, which are primarily characterized by planar structures. 
-                            This paper introduces EmbodiedOcc++, enhancing the original framework with two key innovations: a Geometry-guided Refinement Module (GRM) that constrains Gaussian updates through plane regularization, along with a Semantic-aware Uncertainty Sampler (SUS) that enables more effective updates in overlapping regions between consecutive frames. 
-                            GRM dynamically combines curvature-based and depth-based constraints using an adaptive strategy. 
-                            Our method offers plane regularization, enabling semantic Gaussians to align accurately with planar surfaces while remaining adaptable in complex regions. 
-                            To effectively improve geometric consistency from different views, SUS adaptively selects proper Gaussians to update. 
-                            Comprehensive experiments on the EmbodiedOcc-ScanNet benchmark demonstrate that EmbodiedOcc++ achieves state-of-the-art performance across different settings. 
-                            Our method demonstrates improved edge accuracy and retains more geometric details while ensuring computational efficiency, which is essential for online embodied perception. 
-                            The code will be released. 
+                            While the innovative EmbodiedOcc framework utilizes 3D semantic Gaussians for progressive indoor occupancy prediction, 
+                            it overlooks the geometric characteristics of indoor environments, which are primarily characterized by planar structures. 
+                            This paper introduces EmbodiedOcc++, enhancing the original framework with two key innovations: a Geometry-guided Refinement Module (GRM) that constrains Gaussian updates through plane regularization, 
+                            along with a Semantic-aware Uncertainty Sampler (SUS) that enables more effective updates in overlapping regions between consecutive frames. 
+                            GRM regularizes the position update to align with surface normals. It determines the adaptive regularization weight using curvature-based and depth-based constraints, 
+                            allowing semantic Gaussians to align accurately with planar surfaces while adapting in complex regions. 
+                            To effectively improve geometric consistency from different views, 
+                            SUS adaptively selects proper Gaussians to update. Comprehensive experiments on the EmbodiedOcc-ScanNet benchmark demonstrate that 
+                            EmbodiedOcc++ achieves state-of-the-art performance across different settings. 
+                            Our method demonstrates improved edge accuracy and retains more geometric details while ensuring computational efficiency, 
+                            which is essential for online embodied perception.
                         </p>
                     </div>
                 </div>
@@ -363,12 +359,12 @@
     <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
             <h2 class="title">BibTeX</h2>
-            <pre><code>@article{zhou2024code,
-    title={Code-as-Monitor: Constraint-aware Visual Programming for Reactive and Proactive Robotic Failure Detection},
-    author={Zhou, Enshen and Su, Qi and Chi, Cheng and Zhang, Zhizheng and Wang, Zhongyuan and Huang, Tiejun and Sheng, Lu and Wang, He},
-    journal={arXiv preprint arXiv:2412.04455},
-    year={2024}
-}</code></pre>
+            <pre><code>@article{li2025sliceocc,
+                title={SliceOcc: Indoor 3D Semantic Occupancy Prediction with Vertical Slice Representation},
+                author={Li, Jianing and Lu, Ming and Wang, Hao and Gu, Chenyang and Zheng, Wenzhao and Du, Li and Zhang, Shanghang},
+                journal={arXiv preprint arXiv:2501.16684},
+                year={2025}
+              }</code></pre>
         </div>
     </section>
     <!--End BibTex citation -->

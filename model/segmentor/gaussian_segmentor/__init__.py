@@ -1,0 +1,2 @@
+from .gaussian_segmentor import GaussianSegmentor
+from .gaussian_segmentor_online import GaussianSegmentorOnline

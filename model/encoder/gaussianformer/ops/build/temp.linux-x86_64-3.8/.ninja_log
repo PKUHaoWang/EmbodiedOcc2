@@ -1,0 +1,3 @@
+# ninja log v5
+3	16055	1749483583000000000	/share/project/wanghao/EmbodiedOcc-SDF/model/encoder/gaussianformer/ops/build/temp.linux-x86_64-3.8/src/deformable_aggregation_cuda.o	44a70b971cdb1681
+2	23734	1749483590000000000	/share/project/wanghao/EmbodiedOcc-SDF/model/encoder/gaussianformer/ops/build/temp.linux-x86_64-3.8/src/deformable_aggregation.o	c93c921e09f99ca1

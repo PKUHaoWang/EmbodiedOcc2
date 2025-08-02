@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <br>
+    <!-- <div class="logo" style="text-align: center;">
+        <a href="index.html">
+          <img src="./assets/images/logo.png">
+        </a>
+    </div> -->
+    <title>EmbodiedOcc++: Boosting Embodied 3D Occupancy Prediction with Plane Regularization and Uncertainty Sampler
+    </title>
+
+    <script>
+        var task_map = {
+            "simple-object-manipulation": "simple_object_manipulation",
+            "visual-goal-reaching": "visual_goal_reaching",
+            "novel-concept-grounding": "novel_concept_grounding",
+            "one-shot-video-imitation": "one_shot_video_imitation",
+            "visual-constraint-satisfaction": "visual_constraint_satisfaction",
+            "visual-reasoning": "visual_reasoning"
+        };
+
+        function updateDemoVideo(category) {
+            // var demo = document.getElementById("single-menu-demos").value;
+            var task = document.getElementById(category + "-menu-tasks").value;
+            var inst = document.getElementById(category + "-menu-instances").value;
+
+            console.log(task_map[category], task, inst)
+
+            var video = document.getElementById(category + "-single-task-video");
+            video.src = "assets/videos/demos/" +
+                task_map[category] +
+                "/" +
+                task +
+                "/" +
+                inst +
+                ".mp4";
+            video.playbackRate = 2.0;
+            video.play();
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+
+
+
+
+<body>
+    <!-- Title and Author -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">EmbodiedOcc++: Boosting Embodied 3D Occupancy Prediction with Plane Regularization and Uncertainty Sampler</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a target="_blank" href="https://pkuhaowang.github.io/">Hao&#160;Wang</a><sup>1*</sup>,
+                                <a target="_blank" href="https://ucwxb.github.io/">Xiaobao&#160;Wei</a><sup>1*</sup>,
+                                <a target="_blank" href="https://github.com/Paipai-zxa">Xiaoan&#160;Zhang</a><sup>1</sup>,
+                                <a target="_blank" href="https://github.com/NorthSummer">Jianing&#160;Li</a><sup>2</sup>,
+                                <a target="_blank" href="https://github.com/Bbmyy">Chengyu&#160;Bai</a><sup>1</sup>,
+                                <a target="_blank" href="https://github.com/myendless1">Ying&#160;Li</a><sup>1</sup>,
+                                <br>
+                                <a target="_blank"
+                                    href="https://lu-m13.github.io/">Ming&#160;Lu</a><sup>1</sup>,
+                                <a target="_blank"
+                                    href="https://wzzheng.net/">Wenzhao&#160;Zheng</a><sup>3</sup>,
+                                <a target="_blank"
+                                    href="https://www.shanghangzhang.com/">Shanghang&#160;Zhang</a><sup>1&#9993;</sup>
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University; </span>
+                            <span class="author-block"><sup>2</sup>School of Electronic Science and Engineering, Nanjing University; </span>
+                            <span class="author-block"><sup>3</sup>Department of Electrical Engineering and Computer Sciences, University of California, Berkeley; </span>
+                        </div>
+
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>*&#160;</sup>Equal Contribution&#160;&#160;</span>
+                            <span class="author-block"><sup>&#9993;&#160;</sup>Corresponding Author&#160;&#160;</span>
+                            <!-- <span class="author-block"><sup>&dagger;&#160;</sup>Project Leader&#160;&#160;</span> -->
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- TODO PDF Link. -->
+                                <span class="link-block">
+                                    <a target="_blank" href="https://arxiv.org/pdf/2504.09540"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a target="_blank" href="https://arxiv.org/pdf/2504.09540"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>PDF</span>
+                                    </a>
+                                </span>
+                                
+
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/PKUHaoWang/EmbodiedOcc2"
+                                    class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code coming soon</span>
+                                    </a>
+                                </span>
+
+                                <!-- <span class="link-block">
+                                    <a href="https://www.youtube.com/watch?v=uiXKfOrfGrQ" target="_blank"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-video"></i>
+                                        </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a href="https://www.bilibili.com/video/BV1YXQRY2EHk" target="_blank"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-film"></i>
+                                        </span>
+                                        <span>BiilBili</span>
+                                    </a>
+                                </span> -->
+
+
+                                <!-- Code Link. -->
+                                <!-- <span class="link-block">
+                                    <a target="_blank" href=""
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                    <a target="_blank" href=""
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-database"></i>
+                                        </span>
+                                        <span>Dataset</span>
+                                    </a>
+                                </span> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-small">
+
+        <div class="hero-body">
+            <div class="container is-max-desktop has-text-centered">
+
+                <h2>
+                    <!-- <h2 class=""> <img src="static/images/highlight_logo.png" width="50"> Highlights</h2> -->
+                    <div class="text-image-container title is-3">
+                        <div>
+                            <img src="assets/images/highlight_logo.png" alt="highlight" width="50">
+                        </div>
+                        <div class="text">
+                            <p>Highlights</p>
+                        </div>
+                    </div>
+                </h2>
+
+
+                <div class="content has-text-justified">
+                    <p>
+                        <ul>
+                            <li><b>
+                                    We propose a <span style="color: #E4A902;">Geometry-guided Refinement Module (GRM)</span> that constrains Gaussian updates through plane regularization, adaptively enforcing strong constraints only when both curvature and depth cues indicate planar regions.  
+                                </b></li>
+                            <br>
+                            <li><b>
+                                    We propose a <span style="color: #E4A902;">Semantic-aware Uncertainty Sampler (SUS)</span> that adaptively selects and updates low-confidence Gaussians in overlapping regions between consecutive frames to mitigate redundancy in memory updates.
+                                </b></li>
+                            <br>
+                            <li><b>
+                                    Our method achieves <span style="color: #E4A902;">state-of-the-art (SOTA)</span> performance on the EmbodiedOcc-ScanNet benchmark across various indoor occupancy prediction settings.  
+                                </b></li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Motivation -->
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="is-four-fifths">
+                    <h2 class="title is-3">Motivation</h2>
+                    <img src="assets/images/motivation.png" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto" />
+                    <div class="content has-text-justified">
+                        <p>
+                            Illustration of different Gaussian updates. 
+                            Left: Previous approach with random position updates <b><span style="color: #209CEF;">lacking geometric constraints</span></b>. 
+                            Right: Our approach with surface normal-guided updates that <b><span style="color: #209CEF;">leverage planar priors</span></b> for more accurate indoor scene representation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Paper abstract -->
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Online 3D occupancy prediction provides a comprehensive spatial understanding of embodied environments. 
+                            While the innovative EmbodiedOcc framework utilizes 3D semantic Gaussians for progressive indoor occupancy prediction, 
+                            it overlooks the geometric characteristics of indoor environments, which are primarily characterized by planar structures. 
+                            This paper introduces EmbodiedOcc++, enhancing the original framework with two key innovations: a Geometry-guided Refinement Module (GRM) that constrains Gaussian updates through plane regularization, 
+                            along with a Semantic-aware Uncertainty Sampler (SUS) that enables more effective updates in overlapping regions between consecutive frames. 
+                            GRM regularizes the position update to align with surface normals. It determines the adaptive regularization weight using curvature-based and depth-based constraints, 
+                            allowing semantic Gaussians to align accurately with planar surfaces while adapting in complex regions. 
+                            To effectively improve geometric consistency from different views, 
+                            SUS adaptively selects proper Gaussians to update. Comprehensive experiments on the EmbodiedOcc-ScanNet benchmark demonstrate that 
+                            EmbodiedOcc++ achieves state-of-the-art performance across different settings. 
+                            Our method demonstrates improved edge accuracy and retains more geometric details while ensuring computational efficiency, 
+                            which is essential for online embodied perception.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End paper abstract -->
+
+
+
+    <!-- overview -->
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="is-four-fifths">
+                    <h2 class="title is-3">Method Overview</h2>
+                    <img src="assets/images/method.png" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto" />
+                    <div class="content has-text-justified">
+                        <p>
+                            <b>Overview of EmbodiedOcc++.</b> Given monocular RGB inputs, our EmbodiedOcc++ boosts indoor 3D occupancy prediction with plane regularization. 
+                            To capture intricate geometric details, we design a Geometry-guided Refinement Module that constrains Gaussian updates based on surface priors.
+                            To ensure accurate geometric regularization, we incorporate an adaptive constraint fusion strategy that takes multimodel priors into account. 
+                            For robust and efficient Gaussian refinement, we introduce a Semantic-aware Uncertainty Sampler that actively selects Gaussians to update memory.
+                            Our approach is tailored for embodied scene understanding, preserving planar structures and sharp boundaries during progressive indoor exploration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- element -->
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="is-four-fifths">
+                    <h2 class="title is-3">Geometry-guided Refinement Module</h2>
+                    <img src="assets/images/refine_layer.png" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto" />
+                    <div class="content has-text-justified">
+                        <p>
+                            <b>Geometry-guided Refinement Module.</b> Given a constraint, our model ConSeg generates
+                            instance-level and part-level masks across multiple views, which are projected into 3D
+                            space. Through a series of heuristics, the desired elements are produced. Once all elements
+                            are obtained, they are annotated onto the original multi-view images.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  Visual  -->
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="is-four-fifths">
+                    <h2 class="title is-3">Visualization of our local occupancy prediction</h2>
+                    <img src="assets/images/app_mono.png" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto" />
+                    <div class="content has-text-justified">
+                        <p> <b>The images show how our model effectively constructs occupancy estimates from single monocular views, preserving spatial relationships within the camera frustum. </b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="is-four-fifths">
+                    <h2 class="title is-3">Visualization of our embodied occupancy prediction</h2>
+                    <img src="assets/images/app_online.png" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto" />
+                    <div class="content has-text-justified">
+                        <p> <b>This figure demonstrates the online integration of sequential visual inputs, showing how our model progressively refines its spatial understanding as new observations become available. The temporal sequence illustrates the accumulation of occupancy information across multiple frames.</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@article{wang2025embodiedocc++,
+    title={EmbodiedOcc++: Boosting Embodied 3D Occupancy Prediction with Plane Regularization and Uncertainty Sampler},
+    author={Wang, Hao and Wei, Xiaobao and Zhang, Xiaoan and Li, Jianing and Bai, Chengyu and Li, Ying and Lu, Ming and Zheng, Wenzhao and Zhang, Shanghang},
+    journal={arXiv preprint arXiv:2504.09540},
+    year={2025}
+}</code></pre>
+        </div>
+    </section>
+    <!--End BibTex citation -->
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+
+                        <p>
+                            This page was built using the <a
+                                href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                            You are free to borrow the of this website, we just ask that you link back to this page in
+                            the footer.
+                            <br> This website is licensed under a <a rel="license"
+                                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                                Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

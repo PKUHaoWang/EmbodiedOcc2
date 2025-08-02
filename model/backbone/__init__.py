@@ -1,1 +1,0 @@
-from .swinfusion import SwinFusion

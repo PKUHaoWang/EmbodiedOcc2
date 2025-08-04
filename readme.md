@@ -1,6 +1,6 @@
 <div align="center">
 
-# EmbodiedOcc++: Boosting Embodied 3D Occupancy Prediction with Plane Regularization and Uncertainty Sampler
+# [ACM MM 2025] EmbodiedOcc++: Boosting Embodied 3D Occupancy Prediction with Plane Regularization and Uncertainty Sampler
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
@@ -47,7 +47,7 @@ pip install torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 --index-url htt
 </details>
 
 <details>
-<summary>3. Install some packages following [GaussianFormer](https://github.com/huang-yh/GaussianFormer)</summary>
+<summary>3. Install some packages follwing GaussianFormer</summary>
 
 3.1. Install packages from MMLab
 
@@ -115,7 +115,7 @@ def infer_image(self, image, h_, w_, input_size=518):
 <summary>6. Download EfficientNet-Pytorch</summary>
  
 ```bash
-cd EmbodiedOcc
+cd EmbodiedOcc2
 git clone https://github.com/lukemelas/EfficientNet-PyTorch.git
 ```
 
@@ -164,7 +164,7 @@ Unzip and move them to **data/scene_occ**.
 
 **Folder structure**
 ```
-EmbodiedOcc
+EmbodiedOcc2
 ├── ...
 ├── data/
 │   ├── occscannet/
@@ -210,14 +210,14 @@ python preprocess.py
 
 1. Local occupancy prediction:
     ```
-    $ cd EmbodiedOcc
+    $ cd EmbodiedOcc2
     $ torchrun --nproc_per_node=1 vis_mono.py --work-dir workdir/train_mono 
     $ torchrun --nproc_per_node=1 vis_mono.py --work-dir workdir/train_mono_mini
     ```
 
 2. Embodied occupancy prediction:
     ```
-    $ cd EmbodiedOcc
+    $ cd EmbodiedOcc2
     $ torchrun --nproc_per_node=1 vis_embodied.py --work-dir workdir/train_embodied
     $ torchrun --nproc_per_node=1 vis_embodied.py --work-dir workdir/train_embodied_mini
     ```
